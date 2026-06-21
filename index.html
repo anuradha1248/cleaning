@@ -27,6 +27,9 @@
         --text-muted: #5e5a73; /* Muted lavender-stone */
         --border: #e3dff0; /* Soft lavender border */
         
+        --bg-btn-secondary: #fbfaf8;
+        --border-btn-secondary: var(--border);
+        
         --shadow-sm: 0 2px 4px rgba(24, 20, 38, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
         --shadow-md: 0 10px 30px -10px rgba(79, 70, 229, 0.12), 0 1px 2px rgba(24, 20, 38, 0.05);
         --shadow-lg: 0 20px 40px -15px rgba(24, 20, 38, 0.15), 0 1px 2px rgba(24, 20, 38, 0.05);
@@ -44,6 +47,9 @@
         --text-main: #f4f2fa;
         --text-muted: #9c95b3;
         --border: #2d2645;
+        
+        --bg-btn-secondary: #1a1629;
+        --border-btn-secondary: var(--border);
       }
 
       * {
@@ -153,21 +159,21 @@
       }
 
       .btn-secondary {
-        background: #fbfaf8; /* Soft off-white */
+        background: var(--bg-btn-secondary);
         color: var(--text-main);
-        border: 1px solid var(--border);
-        box-shadow: 0 4px 0 var(--border), 0 6px 12px rgba(24, 20, 38, 0.02);
+        border: 1px solid var(--border-btn-secondary);
+        box-shadow: 0 4px 0 var(--border-btn-secondary), 0 6px 12px rgba(24, 20, 38, 0.02);
       }
 
       .btn-secondary:hover {
-        background: #ffffff;
+        background: var(--bg-surface);
         transform: translateY(-2px);
-        box-shadow: 0 6px 0 var(--border), 0 8px 16px rgba(24, 20, 38, 0.04);
+        box-shadow: 0 6px 0 var(--border-btn-secondary), 0 8px 16px rgba(24, 20, 38, 0.04);
       }
 
       .btn-secondary:active {
         transform: translateY(2px);
-        box-shadow: 0 2px 0 var(--border), 0 4px 6px rgba(24, 20, 38, 0.02);
+        box-shadow: 0 2px 0 var(--border-btn-secondary), 0 4px 6px rgba(24, 20, 38, 0.02);
       }
 
       /* Floating Glassmorphic Navbar */

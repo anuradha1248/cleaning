@@ -981,6 +981,18 @@
       }
 
       /* Floating buttons */
+      @keyframes whatsapp-pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+
       .whatsapp-float {
         position: fixed;
         bottom: 30px;
@@ -997,11 +1009,31 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         z-index: 999;
         text-decoration: none;
-        transition: transform 0.2s;
+        transition: transform 0.2s, background-color 0.2s;
+        animation: whatsapp-pulse 2s infinite;
       }
 
       .whatsapp-float:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
+        background-color: #128c7e;
+      }
+
+      /* WhatsApp Brand Button */
+      .btn-whatsapp {
+        background: linear-gradient(135deg, #25d366, #128c7e);
+        color: #ffffff !important;
+        box-shadow: 0 4px 0 #075e54, 0 8px 16px rgba(37, 211, 102, 0.15);
+      }
+
+      .btn-whatsapp:hover {
+        background: linear-gradient(135deg, #2ae06f, #149c8c);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 #075e54, 0 10px 20px rgba(37, 211, 102, 0.25);
+      }
+
+      .btn-whatsapp:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #075e54, 0 4px 8px rgba(37, 211, 102, 0.1);
       }
 
       /* Modal Styles */
@@ -1835,7 +1867,7 @@
           We are currently building our instant online scheduling system. In the meantime, you can book your cleaning service instantly by calling us or chatting with us on WhatsApp!
         </p>
         <div class="modal-actions">
-          <a href="https://wa.me/919999999999" target="_blank" class="btn btn-primary" style="border-radius: 4px;">
+          <a href="https://wa.me/919999999999" target="_blank" class="btn btn-whatsapp" style="border-radius: 4px;">
             <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
           </a>
           <button class="btn btn-secondary" onclick="closeBookingModal()" style="border-radius: 4px;">Close</button>

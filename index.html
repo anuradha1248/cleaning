@@ -174,10 +174,9 @@
       .navbar {
         position: sticky;
         top: 16px;
-        left: 0;
-        right: 0;
         max-width: 1100px;
-        margin: 16px auto;
+        margin-left: auto;
+        margin-right: auto;
         width: calc(100% - 32px);
         background: rgba(255, 255, 255, 0.85);
         border: 1px solid var(--border);
@@ -1260,7 +1259,8 @@
         }
         .navbar {
           top: 12px;
-          margin: 12px auto;
+          margin-left: auto;
+          margin-right: auto;
           width: calc(100% - 24px);
         }
         .navbar .nav-links {
@@ -1272,6 +1272,10 @@
         .mobile-menu-toggle {
           display: flex;
         }
+        .hero-card {
+          transform: none !important;
+          max-width: 100%;
+        }
         .services-grid, .reviews-grid, .why-grid {
           grid-template-columns: 1fr;
         }
@@ -1282,6 +1286,9 @@
         }
         .why-card:nth-child(1) .why-icon, .why-card:nth-child(4) .why-icon {
           margin-bottom: 16px;
+        }
+        .review-form-container {
+          padding: 24px 16px;
         }
         .footer-grid {
           grid-template-columns: 1fr;
@@ -1321,7 +1328,7 @@
           font-size: 1.75rem;
         }
         .contact-info-panel, .contact-form-panel {
-          padding: 32px 20px;
+          padding: 24px 16px;
         }
       }
     </style>

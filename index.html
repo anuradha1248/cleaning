@@ -34,14 +34,15 @@
                 extend: {
                     colors: {
                         brand: {
-                            primary: '#FF8A00',
-                            accent: '#FFF7ED',
-                            dark: '#1E3A5F',
+                            primary: '#1e90ff',
+                            accent: '#f0f9ff',
+                            dark: '#0f172a',
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         poppins: ['Poppins', 'sans-serif'],
+                        lora: ['Lora', 'serif'],
                     }
                 }
             }
@@ -53,33 +54,33 @@
     <style>
         /* ── Design System Variables (Centralized Theme) ─────────────────── */
         :root {
-            --bmh-primary:       #FF8A00;    /* orange */
-            --bmh-primary-light: #FFF7ED;  /* orange tint bg */
-            --bmh-primary-dark:  #ea580c;  /* darker orange */
-            --bmh-secondary:     #1E3A5F;  /* navy */
-            --bmh-accent:        #FFF7ED;     /* warm tint */
-            --bmh-search-btn:    #FF8A00;  /* search button */
+            --bmh-primary:       #1e90ff;    /* Sky Blue */
+            --bmh-primary-light: #f0f9ff;  /* Sky Blue tint bg */
+            --bmh-primary-dark:  #0284c7;  /* Darker Sky Blue */
+            --bmh-secondary:     #0f172a;  /* Dark Slate */
+            --bmh-accent:        #f0f9ff;     /* Accent tint */
+            --bmh-search-btn:    #1e90ff;  /* search button */
             --bmh-nav-bg:        #FFFFFF;      /* header bg */
-            --bmh-footer-bg:     #1E3A5F;   /* footer bg */
+            --bmh-footer-bg:     #0f172a;   /* footer bg */
             --bmh-text:          #1E293B;
             --bmh-muted:         #64748B;
             --bmh-card-bg:       #FFFFFF;
             --bmh-border:        #F1F5F9;
-            --bmh-shadow:        rgba(255, 138, 0, 0.12);
-            --bmh-shadow-dark:   rgba(30, 58, 95, 0.08);
+            --bmh-shadow:        rgba(30, 144, 255, 0.08);
+            --bmh-shadow-dark:   rgba(15, 23, 42, 0.06);
 
-            /* Orange radii for ambient effects */
-            --org: 255, 138, 0;
-            --nvy: 30, 58, 95;
+            /* Sky Blue radii for ambient effects */
+            --org: 30, 144, 255;
+            --nvy: 15, 23, 42;
         }
 
         /* Dynamic Theme Overrides */
-        .text-\[\#FF8A00\]  { color: var(--bmh-primary) !important; }
-        .bg-\[\#FF8A00\]    { background-color: var(--bmh-primary) !important; }
-        .border-\[\#FF8A00\]{ border-color: var(--bmh-primary) !important; }
-        .hover\:text-\[\#FF8A00\]:hover   { color: var(--bmh-primary) !important; }
-        .hover\:bg-\[\#FF8A00\]:hover     { background-color: var(--bmh-primary) !important; }
-        .hover\:border-\[\#FF8A00\]:hover { border-color: var(--bmh-primary) !important; }
+        .text-\[\#1e90ff\]  { color: var(--bmh-primary) !important; }
+        .bg-\[\#1e90ff\]    { background-color: var(--bmh-primary) !important; }
+        .border-\[\#1e90ff\]{ border-color: var(--bmh-primary) !important; }
+        .hover\:text-\[\#1e90ff\]:hover   { color: var(--bmh-primary) !important; }
+        .hover\:bg-\[\#1e90ff\]:hover     { background-color: var(--bmh-primary) !important; }
+        .hover\:border-\[\#1e90ff\]:hover { border-color: var(--bmh-primary) !important; }
 
         /* Global scrollbar styling */
         html {
@@ -98,9 +99,10 @@
         .poppins { font-family: 'Poppins', sans-serif; }
         .font-playfair { font-family: 'Playfair Display', serif; }
         .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+        .font-lora { font-family: 'Lora', serif; }
         [x-cloak] { display: none !important; }
 
-        /* ── Orange ambient glow utilities ───────────────────────── */
+        /* Sky Blue ambient glow utilities */
         .org-card {
             box-shadow:
                 0 0 0 1px rgba(var(--org), 0.04),
@@ -138,7 +140,7 @@
         .card-hover-effect:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
-            border-color: rgba(255, 138, 0, 0.3);
+            border-color: rgba(30, 144, 255, 0.3);
         }
         /* How It Works custom animations */
         .step-card {
@@ -146,100 +148,18 @@
         }
         .step-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(255, 138, 0, 0.25);
-            box-shadow: 0 16px 32px rgba(259, 115, 22, 0.05);
+            border-color: rgba(30, 144, 255, 0.25);
+            box-shadow: 0 16px 32px rgba(30, 144, 255, 0.05);
         }
         .step-card .step-icon-container {
             transition: all 0.3s ease;
         }
         .step-card:hover .step-icon-container {
             transform: scale(1.12) rotate(6deg);
-            border-color: #FF8A00;
-            background-color: #FFF5EC;
+            border-color: #1e90ff;
+            background-color: #f0f9ff;
         }
-        /* 3D Revolve tilt animations for services */
-        .revolve-card {
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        .revolve-card:hover {
-            transform: translateY(-8px) rotateY(12deg);
-            border-color: rgba(255, 138, 0, 0.35);
-            box-shadow: -10px 15px 30px rgba(255, 138, 0, 0.08);
-        }
-
-        /* Infinite Marquee Auto Scroll CSS */
-        @keyframes marquee-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 1.5rem;
-            animation: marquee-scroll 35s linear infinite;
-        }
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-
-        /* WhatsApp Floating Button & Keyframes */
-        @keyframes whatsapp-pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25d366;
-            color: #ffffff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            z-index: 999;
-            text-decoration: none;
-            transition: transform 0.2s, background-color 0.2s;
-            animation: whatsapp-pulse 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #128c7e;
-        }
-
-        /* WhatsApp Brand Button */
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #ffffff !important;
-            box-shadow: 0 4px 0 #075e54, 0 8px 16px rgba(37, 211, 102, 0.15);
-        }
-
-        .btn-whatsapp:hover {
-            background: linear-gradient(135deg, #2ae06f, #149c8c);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #075e54, 0 10px 20px rgba(37, 211, 102, 0.25);
-        }
-
-        .btn-whatsapp:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #075e54, 0 4px 8px rgba(37, 211, 102, 0.1);
-        }
-
+        
         /* Star Rating Form Styles */
         #starRating span {
             color: #d1d5db; /* gray-300 */
@@ -367,12 +287,10 @@
             <div class="max-w-[1440px] mx-auto px-6 lg:px-[120px] flex items-center justify-between">
                 
                 <!-- Logo -->
-                <a href="#" class="flex items-center gap-2 group transition-transform duration-200">
-                    <div class="w-9 h-9 bg-gradient-to-br from-[#FF8A00] to-[#FFB347] rounded-lg flex items-center justify-center shadow-md shadow-orange-500/10">
-                        <i class="fa-solid fa-broom text-white text-base"></i>
-                    </div>
+                <a href="#" class="flex items-center gap-3 group transition-transform duration-200">
+                    <img src="images/logo.png?v=3" alt="MyBuddy Logo" class="h-10 w-10 object-cover rounded-full shadow-sm border border-slate-100 filter drop-shadow-[0_2px_4px_rgba(30,144,255,0.12)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                     <div class="flex flex-col">
-                        <span class="font-poppins font-black text-lg text-[#FF8A00] tracking-tight leading-none">
+                        <span class="font-lora font-black text-xl text-slate-800 tracking-tight leading-none">
                             MyBuddy
                         </span>
                         <span class="text-[8px] font-bold uppercase tracking-wider text-zinc-400 mt-0.5 font-sans">
@@ -383,28 +301,28 @@
 
                 <!-- Navigation Menu -->
                 <nav class="hidden lg:flex items-center gap-10">
-                    <a href="#home" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Home</a>
-                    <a href="#services" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Services</a>
-                    <a href="#how-it-works" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">How It Works</a>
-                    <a href="#partner" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Partner</a>
-                    <a href="#about-us" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Why Us</a>
-                    <a href="#booking" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Book Now</a>
-                    <a href="#reviews" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">Reviews</a>
-                    <a href="#faq" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#FF8A00] transition-colors duration-200 font-sans">FAQ</a>
+                    <a href="#home" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Home</a>
+                    <a href="#services" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Services</a>
+                    <a href="#booking" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Book Now</a>
+                    <a href="#why-choose-us" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Why Us</a>
+                    <a href="#how-it-works" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">How It Works</a>
+                    <a href="#partner" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Partner</a>
+                    <a href="#reviews" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">Reviews</a>
+                    <a href="#faq" class="relative py-1 text-sm font-bold text-zinc-700 hover:text-[#1e90ff] transition-colors duration-200 font-sans">FAQ</a>
                 </nav>
 
                 <!-- Book Service CTA + Hamburger -->
                 <div class="flex items-center gap-4">
-                    <button 
-                        onclick="showBookingModal()" 
-                        class="hidden sm:flex px-5 py-2 bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-xs rounded-xl transition-all duration-200 shadow-sm active:scale-[0.98] items-center"
+                    <a 
+                        href="#booking"
+                        class="hidden sm:flex px-5 py-2 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl transition-all duration-200 shadow-sm active:scale-[0.98] items-center"
                     >
                         Book Service
-                    </button>
+                    </a>
                     <!-- Mobile Hamburger -->
                     <button 
                         id="mobileMenuToggle" 
-                        class="lg:hidden text-zinc-700 hover:text-[#FF8A00] p-2 focus:outline-none"
+                        class="lg:hidden text-zinc-700 hover:text-[#1e90ff] p-2 focus:outline-none"
                         aria-label="Toggle Menu"
                     >
                         <i class="fa-solid fa-bars text-xl"></i>
@@ -422,14 +340,14 @@
                 <!-- Left Column: Content -->
                 <div class="lg:col-span-5 space-y-6 text-left">
                     <!-- Trust Badge -->
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#FFE4C7] rounded-full shadow-sm">
-                        <span class="w-3.5 h-3.5 rounded-full bg-[#FF8A00] flex items-center justify-center text-white text-[8px]"><i class="fa-solid fa-check"></i></span>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-sky-100 rounded-full shadow-sm">
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#1e90ff] flex items-center justify-center text-white text-[8px]"><i class="fa-solid fa-check"></i></span>
                         <span class="text-xs font-bold text-[#111827]">Trusted • Verified • On-Time</span>
                     </div>
 
                     <!-- Headline -->
-                    <h1 class="font-poppins font-extrabold text-4xl sm:text-5xl lg:text-[64px] tracking-tight text-[#111827] leading-[1.1]">
-                        Professional<br>Cleaning Services<br>at <span class="text-[#FF8A00]">Your Doorstep</span>
+                    <h1 class="font-poppins font-extrabold text-4xl sm:text-5xl lg:text-[56px] tracking-tight text-[#111827] leading-[1.1]">
+                        Professional<br>Cleaning Services<br>at <span class="text-[#1e90ff]">Your Doorstep</span>
                     </h1>
 
                     <!-- Subheadline -->
@@ -439,10 +357,10 @@
 
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-4 pt-2">
-                        <a href="#booking" class="inline-flex items-center justify-center px-6 h-[50px] bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-sm rounded-xl shadow-lg shadow-orange-500/10 active:scale-[0.98] transition-all">
+                        <a href="#booking" class="inline-flex items-center justify-center px-6 h-[50px] bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-sm rounded-xl shadow-lg shadow-sky-500/10 active:scale-[0.98] transition-all">
                             Book a Service
                         </a>
-                        <a href="#partner" class="inline-flex items-center justify-center px-6 h-[50px] border-2 border-[#FF8A00] text-[#FF8A00] hover:bg-orange-50 font-extrabold text-sm rounded-xl active:scale-[0.98] transition-all">
+                        <a href="#partner" class="inline-flex items-center justify-center px-6 h-[50px] border-2 border-[#1e90ff] text-[#1e90ff] hover:bg-sky-50 font-extrabold text-sm rounded-xl active:scale-[0.98] transition-all">
                             Become a Partner
                         </a>
                     </div>
@@ -450,19 +368,19 @@
                     <!-- Trust Points -->
                     <div class="flex flex-wrap gap-6 pt-6 border-t border-zinc-100">
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00]"><i class="fa-solid fa-user-shield text-xs"></i></div>
+                            <div class="w-7 h-7 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff]"><i class="fa-solid fa-user-shield text-xs"></i></div>
                             <span class="text-[10px] font-bold text-[#111827] uppercase tracking-wider leading-tight">Verified<br>Professionals</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00]"><i class="fa-solid fa-tags text-xs"></i></div>
+                            <div class="w-7 h-7 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff]"><i class="fa-solid fa-tags text-xs"></i></div>
                             <span class="text-[10px] font-bold text-[#111827] uppercase tracking-wider leading-tight">Affordable<br>Pricing</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00]"><i class="fa-solid fa-clock text-xs"></i></div>
+                            <div class="w-7 h-7 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff]"><i class="fa-solid fa-clock text-xs"></i></div>
                             <span class="text-[10px] font-bold text-[#111827] uppercase tracking-wider leading-tight">On-Time<br>Service</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00]"><i class="fa-solid fa-thumbs-up text-xs"></i></div>
+                            <div class="w-7 h-7 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff]"><i class="fa-solid fa-thumbs-up text-xs"></i></div>
                             <span class="text-[10px] font-bold text-[#111827] uppercase tracking-wider leading-tight">100% Satisfaction<br>Guaranteed</span>
                         </div>
                     </div>
@@ -472,35 +390,35 @@
                 <div class="lg:col-span-7 relative flex items-center justify-center min-h-[680px]">
                     
                     <!-- Floating Left Cards Column -->
-                    <div class="absolute left-[-20px] xl:left-[30px] flex flex-col gap-6 z-20">
-                        <!-- Deep Cleaning -->
-                        <div class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-broom"></i></div>
-                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Deep<br>Cleaning</span>
+                    <div class="hidden xl:flex absolute left-[-20px] xl:left-[30px] flex-col gap-6 z-20">
+                        <!-- Sofa Cleaning -->
+                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] text-lg"><i class="fa-solid fa-couch"></i></div>
+                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Sofa<br>Cleaning</span>
                         </div>
-                        <!-- Bathroom Cleaning -->
-                        <div class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-soap"></i></div>
-                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Bathroom<br>Cleaning</span>
+                        <!-- Carpet Cleaning -->
+                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] text-lg"><i class="fa-solid fa-rug"></i></div>
+                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Carpet<br>Cleaning</span>
                         </div>
-                        <!-- Office Cleaning -->
-                        <div class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-building"></i></div>
-                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Office<br>Cleaning</span>
+                        <!-- Mattress Cleaning -->
+                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] text-lg"><i class="fa-solid fa-bed"></i></div>
+                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Mattress<br>Sanitization</span>
                         </div>
                     </div>
 
                     <!-- Floating Right Cards Column -->
-                    <div class="absolute right-[-10px] xl:right-[50px] flex flex-col gap-6 z-20">
-                        <!-- Sofa Cleaning -->
-                        <div class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-couch"></i></div>
-                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Sofa<br>Cleaning</span>
+                    <div class="hidden xl:flex absolute right-[-10px] xl:right-[50px] flex-col gap-6 z-20">
+                        <!-- AC Wet Wash -->
+                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] text-lg"><i class="fa-solid fa-wind"></i></div>
+                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">AC<br>Wet Wash</span>
                         </div>
-                        <!-- Kitchen Cleaning -->
-                        <div class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-kitchen-set"></i></div>
-                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Kitchen<br>Cleaning</span>
+                        <!-- Water Tank Cleaning -->
+                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[140px] h-[150px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-zinc-100 flex flex-col items-center justify-center gap-2.5 cursor-pointer card-hover-effect">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] text-lg"><i class="fa-solid fa-faucet-drip"></i></div>
+                            <span class="text-xs font-black text-slate-800 tracking-tight text-center">Water Tank<br>Cleaning</span>
                         </div>
                     </div>
 
@@ -534,11 +452,11 @@
                                 </div>
 
                                 <!-- Promo Card -->
-                                <div class="bg-gradient-to-br from-[#FF8A00] to-[#FFB347] rounded-xl p-3.5 text-white flex justify-between items-center relative overflow-hidden h-[100px] shadow-sm">
+                                <div class="bg-gradient-to-br from-[#1e90ff] to-[#00bcd4] rounded-xl p-3.5 text-white flex justify-between items-center relative overflow-hidden h-[100px] shadow-sm">
                                     <div class="space-y-1 relative z-10">
                                         <span class="text-lg font-black tracking-tight leading-none block">20% OFF</span>
                                         <span class="text-[8px] font-bold text-white/90 block leading-tight">on your first booking</span>
-                                        <button onclick="showBookingModal()" class="mt-2 px-2.5 py-0.5 bg-white text-[#FF8A00] font-black text-[8px] rounded transition-transform active:scale-95">Book Now</button>
+                                        <a href="#booking" class="mt-2 px-2.5 py-0.5 bg-white text-[#1e90ff] font-black text-[8px] rounded transition-transform active:scale-95 inline-block text-center">Book Now</a>
                                     </div>
                                     <img
                                         src="images/rahulbuket.webp"
@@ -552,32 +470,32 @@
                                 <div class="space-y-2">
                                     <div class="flex items-center justify-between">
                                         <span class="text-[9px] font-black text-[#111827] uppercase tracking-wider">Popular Services</span>
-                                        <span class="text-[8px] text-[#FF8A00] font-bold">View All</span>
+                                        <span class="text-[8px] text-[#1e90ff] font-bold">View All</span>
                                     </div>
                                     <div class="grid grid-cols-3 gap-1.5">
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-house-chimney"></i></div>
-                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Home<br>Cleaning</span>
-                                        </div>
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-broom"></i></div>
-                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Deep<br>Cleaning</span>
-                                        </div>
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-couch"></i></div>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-couch"></i></div>
                                             <span class="text-[7px] font-black text-slate-800 leading-none text-center">Sofa<br>Cleaning</span>
                                         </div>
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-soap"></i></div>
-                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Bathroom<br>Cleaning</span>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-table"></i></div>
+                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Table &<br>Chair</span>
                                         </div>
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-kitchen-set"></i></div>
-                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Kitchen<br>Cleaning</span>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-rug"></i></div>
+                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Carpet<br>Cleaning</span>
                                         </div>
-                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-orange-100 hover:shadow-[0_4px_12px_rgba(255,138,0,0.05)] transition-all">
-                                            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-[#FF8A00] text-[10px]"><i class="fa-solid fa-wrench"></i></div>
-                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Plumbing<br>Service</span>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-bed"></i></div>
+                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Mattress<br>Sanitize</span>
+                                        </div>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-wind"></i></div>
+                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">AC Wet<br>Wash</span>
+                                        </div>
+                                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="bg-white border border-zinc-100 p-1.5 rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-sky-100 hover:shadow-[0_4px_12px_rgba(30,144,255,0.05)] transition-all">
+                                            <div class="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center text-[#1e90ff] text-[10px]"><i class="fa-solid fa-wrench"></i></div>
+                                            <span class="text-[7px] font-black text-slate-800 leading-none text-center">Plumbing<br>Fix</span>
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +503,7 @@
 
                             <!-- App Footer -->
                             <div class="flex items-center justify-between border-t border-zinc-100 pt-2 mt-auto">
-                                <div class="flex flex-col items-center gap-0.5 flex-1 text-[#FF8A00]">
+                                <div class="flex flex-col items-center gap-0.5 flex-1 text-[#1e90ff]">
                                     <i class="fa-solid fa-house text-[10px]"></i>
                                     <span class="text-[7px] font-black uppercase tracking-wider leading-none">Home</span>
                                 </div>
@@ -610,314 +528,234 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative">
-            <div class="space-y-10">
+        <section id="services" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative scroll-mt-24">
+            <div class="space-y-12">
                 <div class="space-y-2">
-                    <p class="text-xs font-black uppercase tracking-widest text-[#FF8A00]">Our Services</p>
-                    <h2 class="font-poppins font-black text-3xl text-[#111827]">Our Cleaning & Maintenance Services</h2>
+                    <p class="text-xs font-black uppercase tracking-widest text-[#1e90ff]">Services & Pricing</p>
+                    <h2 class="font-poppins font-black text-3xl text-[#111827]">Our Cleaning Offerings</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto font-medium">Transparent, upfront pricing. Choose what you need cleaned and know the price instantly.</p>
                 </div>
 
-                <!-- Auto-Scroller Marquee -->
-                <div class="relative w-full overflow-hidden py-4">
-                    <div class="marquee-track">
-                        
-                        <!-- First Loop -->
-                        <!-- Home Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-house-chimney"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Home Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Regular home cleaning & dusting</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Dusting, vacuuming, mopping, kitchen slabs cleaning & trash removal.</p>
-                                </div>
+                <!-- Services Grid (7 Original Cards Reverted & Polished) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                    
+                    <!-- Sofa Deep Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/sofa.png" alt="Sofa Deep Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Sofa Deep Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">High-suction extraction scrubbing to remove sweat, dirt, coffee stains, and pet odors from fabric or leather.</p>
                             </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹299</span>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Single Seat</span>
+                                    <strong class="text-[#1e90ff]">₹250</strong>
                                 </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>3 Seater</span>
+                                    <strong class="text-[#1e90ff]">₹650</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>5 Seater</span>
+                                    <strong class="text-[#1e90ff]">₹999</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
                             </div>
                         </div>
-
-                        <!-- Deep Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-broom"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Deep Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Complete deep cleaning service</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Hard stains removal, windows scrub, cabinet inside & exhaust fan deep cleaning.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.9</span>
-                                    <span class="text-[#FF8A00]">₹999</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Sofa Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-couch"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Sofa Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Sofa & upholstery cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Sofa shampooing, dust extraction, wet vacuuming and fabric sanitization.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.7</span>
-                                    <span class="text-[#FF8A00]">₹499</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Kitchen Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-kitchen-set"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Kitchen Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Kitchen & chimney cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Deep grease removal, chimney scrub, cabinet sanitization & tiles wash.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹599</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Bathroom Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-soap"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Bathroom Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Bathroom & toilet sanitization</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Water scale removal, toilet bowl scrub, mirror glass & floor wash.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹399</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Plumbing Service (NEW local migration) -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-wrench"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Plumbing Service</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Leak detection & repair</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Minor leak repairs, blockages, sink install and plumbing checks.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹199</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Office Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-building"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Office Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Office & commercial cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Desks dusting, carpet vacuuming, trash disposal & complete sanitization.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.9</span>
-                                    <span class="text-[#FF8A00]">Custom</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <!-- Second Loop for marquee scrolling -->
-                        <!-- Home Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-house-chimney"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Home Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Regular home cleaning & dusting</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Dusting, vacuuming, mopping, kitchen slabs cleaning & trash removal.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹299</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Deep Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-broom"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Deep Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Complete deep cleaning service</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Hard stains removal, windows scrub, cabinet inside & exhaust fan deep cleaning.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.9</span>
-                                    <span class="text-[#FF8A00]">₹999</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Sofa Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-couch"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Sofa Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Sofa & upholstery cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Sofa shampooing, dust extraction, wet vacuuming and fabric sanitization.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.7</span>
-                                    <span class="text-[#FF8A00]">₹499</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Kitchen Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-kitchen-set"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Kitchen Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Kitchen & chimney cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Deep grease removal, chimney scrub, cabinet sanitization & tiles wash.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹599</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Bathroom Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-soap"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Bathroom Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Bathroom & toilet sanitization</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Water scale removal, toilet bowl scrub, mirror glass & floor wash.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹399</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Plumbing Service -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-wrench"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Plumbing Service</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Leak detection & repair</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Minor leak repairs, blockages, sink install and plumbing checks.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.8</span>
-                                    <span class="text-[#FF8A00]">₹199</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Office Cleaning -->
-                        <div onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });" class="w-[200px] shrink-0 bg-white p-5 rounded-2xl border border-zinc-100 hover:border-orange-200 transition-all text-center flex flex-col items-center justify-between gap-3 min-h-[250px] revolve-card whitespace-normal cursor-pointer select-none">
-                            <div class="flex flex-col items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-[#FF8A00] text-lg"><i class="fa-solid fa-building"></i></div>
-                                <div>
-                                    <h3 class="font-poppins font-black text-sm text-[#111827] leading-snug">Office Cleaning</h3>
-                                    <p class="text-[#6B7280] text-[10px] leading-normal mt-1 font-semibold">Office & commercial cleaning</p>
-                                    <p class="text-zinc-400 text-[8px] leading-relaxed mt-1.5 border-t border-zinc-50 pt-1.5">Desks dusting, carpet vacuuming, trash disposal & complete sanitization.</p>
-                                </div>
-                            </div>
-                            <div class="w-full pt-2 border-t border-zinc-50 flex flex-col items-center gap-2">
-                                <div class="flex items-center justify-between w-full text-[9px] font-bold">
-                                    <span class="text-amber-500 flex items-center gap-0.5"><i class="fa-solid fa-star"></i> 4.9</span>
-                                    <span class="text-[#FF8A00]">Custom</span>
-                                </div>
-                                <span class="text-[9px] font-black text-slate-800 flex items-center gap-1 hover:text-[#FF8A00] transition-colors mt-0.5">
-                                    Book Now <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                </span>
-                            </div>
-                        </div>
-                        
                     </div>
+
+                    <!-- Table & Chair Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/table.png" alt="Table & Chair Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Table & Chair Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Sanitizing and polishing for wood or glass tables, and deep moisture extraction for upholstered chairs.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Single Table</span>
+                                    <strong class="text-[#1e90ff]">₹350</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Single Chair</span>
+                                    <strong class="text-[#1e90ff]">₹150</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Full Set (Table + 4 Chairs)</span>
+                                    <strong class="text-[#1e90ff]">₹1,000</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carpet Deep Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/carpet.png" alt="Carpet Deep Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Carpet Deep Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Pressure extraction wash to pull out ground-in soil, dust mites, and bacteria from heavy rugs.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Small Rug</span>
+                                    <strong class="text-[#1e90ff]">₹500</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Medium Carpet</span>
+                                    <strong class="text-[#1e90ff]">₹750</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Large Carpet</span>
+                                    <strong class="text-[#1e90ff]">₹950</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mattress Sanitization -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/mattress.png" alt="Mattress Sanitization" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Mattress Sanitization</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Thorough allergen extraction and stain treatment for a clean, dust-mite-free sleeping surface.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Single Mattress</span>
+                                    <strong class="text-[#1e90ff]">₹300</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Double Mattress</span>
+                                    <strong class="text-[#1e90ff]">₹550</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>King Mattress</span>
+                                    <strong class="text-[#1e90ff]">₹1,000</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AC Wet Wash Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/ac.png" alt="AC Wet Wash Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">AC Wet Wash Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Deep jet wet wash of air filter units, coils, and drain trays to clear dust, mold, and restore cooling efficiency.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Window AC Unit</span>
+                                    <strong class="text-[#1e90ff]">₹500</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Split AC (1.5 Ton)</span>
+                                    <strong class="text-[#1e90ff]">₹800</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Split AC (2.0 Ton)</span>
+                                    <strong class="text-[#1e90ff]">₹1,000</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Water Tank Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/watertank.png" alt="Water Tank Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Water Tank Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Sludge removal, high-pressure washing, scrubbing, and chlorine sanitization for hygienic household water.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Small Tank (Up to 500L)</span>
+                                    <strong class="text-[#1e90ff]">₹350</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Medium Tank (1000L)</span>
+                                    <strong class="text-[#1e90ff]">₹450</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Large Tank (2000L)</span>
+                                    <strong class="text-[#1e90ff]">₹650</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Plumbing & Pipe Cleaning -->
+                    <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md shadow-sky-500/5 hover:-translate-y-2 hover:shadow-lg hover:border-sky-100 hover:shadow-sky-500/10 transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+                        <div class="h-52 w-full overflow-hidden relative group shrink-0">
+                            <img src="images/plumber.png" alt="Plumbing & Pipe Cleaning" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-poppins font-black text-lg text-slate-900 leading-snug">Plumbing &amp; Pipe Cleaning</h3>
+                                <p class="text-slate-500 text-xs leading-relaxed font-semibold">Leak detection, high-pressure clog removal, drain scrubbing, and fixture sanitization to restore normal flow.</p>
+                            </div>
+                            <div class="space-y-2 border-t border-slate-50 pt-4 mt-4">
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Minor Leak Fix</span>
+                                    <strong class="text-[#1e90ff]">₹250</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Clog Removal (Drain)</span>
+                                    <strong class="text-[#1e90ff]">₹450</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-50 hover:bg-sky-50 transition-colors px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700">
+                                    <span>Complete Basin Deep Clean</span>
+                                    <strong class="text-[#1e90ff]">₹799</strong>
+                                </div>
+                                <a href="#booking" class="w-full py-2.5 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition-all mt-4 flex items-center justify-center gap-1">
+                                    Book Now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -926,49 +764,40 @@
         <section id="how-it-works" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative">
             <div class="space-y-12">
                 <div class="space-y-2">
-                    <p class="text-xs font-black uppercase tracking-widest text-[#FF8A00]">Simple & Fast</p>
+                    <p class="text-xs font-black uppercase tracking-widest text-[#1e90ff]">Simple & Fast</p>
                     <h2 class="font-poppins font-black text-3xl text-[#111827]">How It Works</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
                     <div class="relative bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col items-center text-center space-y-3 z-10 step-card">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#FF8A00] text-xl shadow-sm border border-zinc-100 step-icon-container">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#1e90ff] text-xl shadow-sm border border-zinc-100 step-icon-container">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <div class="w-5 h-5 bg-[#FF8A00] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">1</div>
-                        <h3 class="font-poppins font-black text-sm text-[#111827]">Choose a Service</h3>
-                        <p class="text-[#6B7280] text-xs leading-normal">Select the cleaning service you need</p>
+                        <div class="w-5 h-5 bg-[#1e90ff] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">1</div>
+                        <h3 class="font-poppins font-black text-sm text-[#111827]">Request a Slot</h3>
+                        <p class="text-[#6B7280] text-xs leading-normal">Fill out our booking form or drop us a WhatsApp message</p>
                     </div>
 
                     <div class="relative bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col items-center text-center space-y-3 z-10 step-card">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#FF8A00] text-xl shadow-sm border border-zinc-100 step-icon-container">
-                            <i class="fa-solid fa-calendar-days"></i>
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#1e90ff] text-xl shadow-sm border border-zinc-100 step-icon-container">
+                            <i class="fa-solid fa-broom"></i>
                         </div>
-                        <div class="w-5 h-5 bg-[#FF8A00] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">2</div>
-                        <h3 class="font-poppins font-black text-sm text-[#111827]">Pick Date & Time</h3>
-                        <p class="text-[#6B7280] text-xs leading-normal">Choose a convenient date and time slot</p>
+                        <div class="w-5 h-5 bg-[#1e90ff] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">2</div>
+                        <h3 class="font-poppins font-black text-sm text-[#111827]">Thorough Deep Clean</h3>
+                        <p class="text-[#6B7280] text-xs leading-normal">Our expert cleaners arrive and deep clean your space thoroughly</p>
                     </div>
 
                     <div class="relative bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col items-center text-center space-y-3 z-10 step-card">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#FF8A00] text-xl shadow-sm border border-zinc-100 step-icon-container">
-                            <i class="fa-solid fa-file-invoice"></i>
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#1e90ff] text-xl shadow-sm border border-zinc-100 step-icon-container">
+                            <i class="fa-solid fa-circle-check"></i>
                         </div>
-                        <div class="w-5 h-5 bg-[#FF8A00] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">3</div>
-                        <h3 class="font-poppins font-black text-sm text-[#111827]">Confirm Booking</h3>
-                        <p class="text-[#6B7280] text-xs leading-normal">Confirm your booking in seconds</p>
-                    </div>
-
-                    <div class="relative bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col items-center text-center space-y-3 z-10 step-card">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#FF8A00] text-xl shadow-sm border border-zinc-100 step-icon-container">
-                            <i class="fa-solid fa-user-tie"></i>
-                        </div>
-                        <div class="w-5 h-5 bg-[#FF8A00] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">4</div>
-                        <h3 class="font-poppins font-black text-sm text-[#111827]">We Clean Your Space</h3>
-                        <p class="text-[#6B7280] text-xs leading-normal">Our expert arrives and cleans your space</p>
+                        <div class="w-5 h-5 bg-[#1e90ff] text-white rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm">3</div>
+                        <h3 class="font-poppins font-black text-sm text-[#111827]">Inspect & Pay</h3>
+                        <p class="text-[#6B7280] text-xs leading-normal">Review our work and pay only after you are 100% satisfied</p>
                     </div>
                     
                     <!-- Dotted Line -->
-                    <div class="hidden lg:block absolute top-[44px] left-[12%] right-[12%] h-[1px] border-t-2 border-dashed border-zinc-200 z-0"></div>
+                    <div class="hidden lg:block absolute top-[44px] left-[16%] right-[16%] h-[1px] border-t-2 border-dashed border-zinc-200 z-0"></div>
                 </div>
             </div>
         </section>
@@ -985,19 +814,19 @@
                     
                     <ul class="space-y-3.5 text-xs sm:text-sm font-semibold text-[#6B7280]">
                         <li class="flex items-center gap-3">
-                            <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                            <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                             <span>Easy booking in just a few taps</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                            <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                             <span>Verified & background-checked professionals</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                            <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                             <span>Real-time booking tracking</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                            <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                             <span>Secure payments</span>
                         </li>
                     </ul>
@@ -1022,21 +851,21 @@
                             
                             <div class="space-y-1 my-1.5 sm:my-2.5 text-left text-[5px] sm:text-[6px] font-semibold text-zinc-600">
                                 <div class="flex items-center gap-1 border-b border-zinc-50 pb-1">
-                                    <i class="fa-solid fa-user text-[#FF8A00]"></i>
+                                    <i class="fa-solid fa-user text-[#1e90ff]"></i>
                                     <span>Cleaner: Ramesh K.</span>
                                 </div>
                                 <div class="flex items-center gap-1 border-b border-zinc-50 pb-1">
-                                    <i class="fa-solid fa-calendar-day text-[#FF8A00]"></i>
+                                    <i class="fa-solid fa-calendar-day text-[#1e90ff]"></i>
                                     <span>Date: Today</span>
                                 </div>
                                 <div class="flex items-center gap-1 border-b border-zinc-50 pb-1">
-                                    <i class="fa-solid fa-clock text-[#FF8A00]"></i>
+                                    <i class="fa-solid fa-clock text-[#1e90ff]"></i>
                                     <span>Time: 2:00 PM</span>
                                 </div>
                             </div>
-                            <button onclick="showBookingModal()" class="w-full py-1 sm:py-1.5 bg-[#FF8A00] text-white font-extrabold text-[7px] sm:text-[8px] rounded-lg shadow-sm">
+                            <a href="#booking" class="w-full py-1 sm:py-1.5 bg-[#1e90ff] text-white font-extrabold text-[7px] sm:text-[8px] rounded-lg shadow-sm text-center">
                                 Share Receipt
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -1049,11 +878,11 @@
                             <div class="absolute inset-0 bg-[#E8ECEF] z-0 flex items-center justify-center">
                                 <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
                                 <svg class="absolute w-full h-full" viewBox="0 0 100 100">
-                                    <path d="M 20 80 Q 50 50 80 20" fill="none" stroke="#FF8A00" stroke-width="3" stroke-linecap="round" />
+                                    <path d="M 20 80 Q 50 50 80 20" fill="none" stroke="#1e90ff" stroke-width="3" stroke-linecap="round" />
                                     <path d="M 20 80 Q 50 50 80 20" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,4" />
                                 </svg>
                                 <i class="fa-solid fa-location-dot text-blue-500 text-base sm:text-lg absolute top-[30%] left-[65%] animate-bounce"></i>
-                                <i class="fa-solid fa-house-chimney text-[#FF8A00] text-xs sm:text-sm absolute top-[70%] left-[25%]"></i>
+                                <i class="fa-solid fa-house-chimney text-[#1e90ff] text-xs sm:text-sm absolute top-[70%] left-[25%]"></i>
                             </div>
                             
                             <!-- Tracking Card -->
@@ -1062,7 +891,7 @@
                                 <div class="flex items-center gap-1 mt-1 justify-between">
                                     <div class="flex items-center gap-1">
                                         <div class="w-4 sm:w-5 h-4 sm:h-5 rounded-full overflow-hidden bg-zinc-200">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" class="w-full h-full object-cover">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" class="w-full h-full object-cover animate-pulse">
                                         </div>
                                         <div>
                                             <span class="text-[6px] sm:text-[7px] font-black text-slate-800 block leading-tight">Ramesh Kumar</span>
@@ -1078,7 +907,7 @@
 
                 <!-- Right Column: Partner -->
                 <div class="lg:col-span-5 relative w-full min-h-[420px] lg:-translate-x-6 flex items-center rounded-2xl overflow-hidden bg-white" style="background-image: url('images/cleaning_partner.png'); background-repeat: no-repeat; background-position: calc(100% + 18px) bottom; background-size: auto 90%;">
-                    <div class="space-y-6 text-left relative z-10 w-[48%] py-8">
+                    <div class="space-y-6 text-left relative z-10 w-[65%] sm:w-[55%] lg:w-[48%] pl-6 pr-2 py-8">
                         <h2 class="font-poppins font-black text-2xl sm:text-3xl text-[#111827] leading-tight">
                             Earn More with<br>MyBuddy Partner
                         </h2>
@@ -1088,21 +917,21 @@
 
                         <ul class="space-y-3.5 text-xs sm:text-sm font-semibold text-[#6B7280]">
                             <li class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                                <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                                 <span>Flexible working hours</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                                <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                                 <span>Daily job updates</span>
                             </li>
                             <li class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full border border-[#FF8A00] flex items-center justify-center text-[#FF8A00] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
+                                <span class="w-5 h-5 rounded-full border border-[#1e90ff] flex items-center justify-center text-[#1e90ff] text-xs shrink-0"><i class="fa-solid fa-check text-[9px]"></i></span>
                                 <span>Instant payouts</span>
                             </li>
                         </ul>
 
                         <div class="pt-2">
-                            <a href="https://wa.me/919999999999" target="_blank" class="px-6 py-3 bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-xs rounded-xl transition-all shadow-md inline-block">
+                            <a href="https://wa.me/919999999999" target="_blank" class="px-6 py-3 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl transition-all shadow-md inline-block">
                                 Join as Partner
                             </a>
                         </div>
@@ -1113,7 +942,7 @@
         </section>
 
         <!-- Why Choose Us / About Us -->
-        <section id="about-us" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative scroll-mt-24">
+        <section id="why-choose-us" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative scroll-mt-24">
             <div class="space-y-12">
                 <div class="space-y-2">
                     <h2 class="font-poppins font-black text-3xl text-[#111827]">Why Choose MyBuddy?</h2>
@@ -1122,62 +951,145 @@
 
                 <!-- Bento Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-center">
-                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-orange-100 hover:shadow-sm">
+                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-sky-100 hover:shadow-sm">
                         <div class="space-y-3">
-                            <div class="w-10 h-10 bg-orange-50 text-[#FF8A00] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-id-card-clip"></i></div>
+                            <div class="w-10 h-10 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-id-card-clip"></i></div>
                             <h3 class="font-poppins font-black text-sm text-[#111827]">Verified Cleaners</h3>
                             <p class="text-[#6B7280] text-[10px] leading-relaxed">Background-checked and trained experts. Every professional undergoes rigorous vetting.</p>
                         </div>
-                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#FF8A00] uppercase tracking-wider rounded-lg block self-center">10k+ Vetted</span>
+                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#1e90ff] uppercase tracking-wider rounded-lg block self-center font-poppins">10k+ Vetted</span>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-orange-100 hover:shadow-sm">
+                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-sky-100 hover:shadow-sm">
                         <div class="space-y-3">
-                            <div class="w-10 h-10 bg-orange-50 text-[#FF8A00] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-lock"></i></div>
+                            <div class="w-10 h-10 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-lock"></i></div>
                             <h3 class="font-poppins font-black text-sm text-[#111827]">Safe & Secure</h3>
                             <p class="text-[#6B7280] text-[10px] leading-relaxed">We care about your safety and privacy. Secure payment options and insured services.</p>
                         </div>
-                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#FF8A00] uppercase tracking-wider rounded-lg block self-center">Fully Insured</span>
+                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#1e90ff] uppercase tracking-wider rounded-lg block self-center font-poppins">Fully Insured</span>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-orange-100 hover:shadow-sm">
+                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-sky-100 hover:shadow-sm">
                         <div class="space-y-3">
-                            <div class="w-10 h-10 bg-orange-50 text-[#FF8A00] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                            <div class="w-10 h-10 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-indian-rupee-sign"></i></div>
                             <h3 class="font-poppins font-black text-sm text-[#111827]">Affordable Pricing</h3>
                             <p class="text-[#6B7280] text-[10px] leading-relaxed">Transparent pricing with no hidden fees. Get precise calculations before booking.</p>
                         </div>
-                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#FF8A00] uppercase tracking-wider rounded-lg block self-center">Flat Rates</span>
+                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#1e90ff] uppercase tracking-wider rounded-lg block self-center font-poppins">Flat Rates</span>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-orange-100 hover:shadow-sm">
+                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-sky-100 hover:shadow-sm">
                         <div class="space-y-3">
-                            <div class="w-10 h-10 bg-orange-50 text-[#FF8A00] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-stopwatch"></i></div>
+                            <div class="w-10 h-10 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-stopwatch"></i></div>
                             <h3 class="font-poppins font-black text-sm text-[#111827]">On-Time Service</h3>
                             <p class="text-[#6B7280] text-[10px] leading-relaxed">We respect your time and arrive on time. Track coordinates inside the app in real time.</p>
                         </div>
-                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#FF8A00] uppercase tracking-wider rounded-lg block self-center">99% On-Time</span>
+                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#1e90ff] uppercase tracking-wider rounded-lg block self-center font-poppins">99% On-Time</span>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-orange-100 hover:shadow-sm">
+                    <div class="bg-white p-6 rounded-2xl border border-zinc-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform hover:border-sky-100 hover:shadow-sm">
                         <div class="space-y-3">
-                            <div class="w-10 h-10 bg-orange-50 text-[#FF8A00] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-award"></i></div>
+                            <div class="w-10 h-10 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-base mx-auto"><i class="fa-solid fa-award"></i></div>
                             <h3 class="font-poppins font-black text-sm text-[#111827]">Satisfaction Guaranteed</h3>
                             <p class="text-[#6B7280] text-[10px] leading-relaxed">Not happy? We'll make it right. Free re-cleans provided if expectations aren't met.</p>
                         </div>
-                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#FF8A00] uppercase tracking-wider rounded-lg block self-center">100% Quality</span>
+                        <span class="mt-4 px-2 py-1 bg-zinc-50 border border-zinc-100 text-[8px] font-extrabold text-[#1e90ff] uppercase tracking-wider rounded-lg block self-center font-poppins">100% Quality</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Book a Cleaning form section -->
-        <!-- Placed dynamically before testimonials and FAQ -->
+        <!-- Book a Cleaning form section (Original Rebuilt Form) -->
+        <section id="booking" class="py-16 px-6 lg:px-[120px] bg-slate-50 border-t border-slate-100 max-w-[1440px] mx-auto scroll-mt-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Info Panel -->
+                <div class="lg:col-span-4 space-y-6 text-left">
+                    <p class="text-xs font-black uppercase tracking-widest text-[#1e90ff]">Book Now</p>
+                    <h2 class="font-poppins font-black text-3xl text-[#111827] leading-tight">Request a Cleaning Slot</h2>
+                    <p class="text-slate-500 text-sm leading-relaxed font-semibold">
+                        Fill out our Quick Booking form or contact us directly via WhatsApp. Once we confirm the details, we will schedule your slot. Pay only after the service is completed!
+                    </p>
+                    
+                    <div class="space-y-4 pt-4 border-t border-slate-200">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4 class="text-xs font-black text-slate-800 font-poppins">Call/WhatsApp Support</h4>
+                                <p class="text-slate-500 text-xs font-medium mt-0.5">+91 93765 43210</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h4 class="text-xs font-black text-slate-800 font-poppins">Email Address</h4>
+                                <p class="text-slate-500 text-xs font-medium mt-0.5">support@mybuddy.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-[#1e90ff] shrink-0"><i class="fa-solid fa-tags"></i></div>
+                            <div>
+                                <h4 class="text-xs font-black text-slate-800 font-poppins">Payment Modes</h4>
+                                <p class="text-slate-500 text-xs font-medium mt-0.5">Cash, UPI (GPay/PhonePe), Credit/Debit Card</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form Panel -->
+                <div class="lg:col-span-8 bg-white border border-slate-100 shadow-md shadow-sky-500/5 rounded-3xl p-8 w-full text-left">
+                    <h3 class="font-poppins font-black text-lg text-[#111827] mb-6">Quick Booking Form</h3>
+                    <form onsubmit="event.preventDefault(); showBookingModal();" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="bookingName" class="block text-xs font-bold text-slate-700 mb-1.5">Your Name</label>
+                                <input type="text" id="bookingName" class="w-full px-4 h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" placeholder="Enter your full name" required />
+                            </div>
+                            <div>
+                                <label for="bookingPhone" class="block text-xs font-bold text-slate-700 mb-1.5">Phone Number</label>
+                                <input type="tel" id="bookingPhone" class="w-full px-4 h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" placeholder="Enter 10-digit number" required />
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="bookingService" class="block text-xs font-bold text-slate-700 mb-1.5">Select Service</label>
+                                <select id="bookingService" class="w-full px-4 h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" required>
+                                    <option value="" disabled selected>Select service</option>
+                                    <option value="Sofa Cleaning">Sofa Deep Cleaning</option>
+                                    <option value="Table & Chair Cleaning">Table & Chair Cleaning</option>
+                                    <option value="Carpet Cleaning">Carpet Deep Cleaning</option>
+                                    <option value="Mattress Cleaning">Mattress Sanitization</option>
+                                    <option value="AC Wet Wash">AC Wet Wash Cleaning</option>
+                                    <option value="Water Tank Cleaning">Water Tank Cleaning</option>
+                                    <option value="Plumbing & Pipe Cleaning">Plumbing &amp; Pipe Cleaning</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="bookingDate" class="block text-xs font-bold text-slate-700 mb-1.5">Preferred Date</label>
+                                <input type="date" id="bookingDate" class="w-full px-4 h-[44px] bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="bookingAddress" class="block text-xs font-bold text-slate-700 mb-1.5">Service Address</label>
+                            <textarea id="bookingAddress" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff] min-h-[90px]" placeholder="Enter complete address details..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full h-[48px] bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]">
+                            Request Booking
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
         
         <!-- Reviews / Comments Section -->
         <section id="reviews" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative scroll-mt-24">
             <div class="space-y-12">
                 <div class="space-y-2">
-                    <p class="text-xs font-black uppercase tracking-widest text-[#FF8A00]">Reviews</p>
+                    <p class="text-xs font-black uppercase tracking-widest text-[#1e90ff]">Reviews</p>
                     <h2 class="font-poppins font-black text-3xl text-[#111827]">What Our Customers Say</h2>
                 </div>
 
@@ -1190,18 +1102,18 @@
 
                     <!-- Show more button -->
                     <div class="pt-4">
-                        <button id="showMoreBtn" class="px-5 py-2.5 bg-zinc-50 border border-zinc-200 text-xs font-black text-[#111827] rounded-xl hover:bg-orange-50 hover:text-[#FF8A00] hover:border-orange-100 transition-colors" onclick="toggleReviews()" style="display: none;">Show More Reviews</button>
+                        <button id="showMoreBtn" class="px-5 py-2.5 bg-zinc-50 border border-zinc-200 text-xs font-black text-[#111827] rounded-xl hover:bg-sky-50 hover:text-[#1e90ff] hover:border-sky-100 transition-colors" onclick="toggleReviews()" style="display: none;">Show More Reviews</button>
                     </div>
                 </div>
 
                 <!-- Leave a Review Form -->
-                <div class="max-w-[550px] mx-auto bg-zinc-50 border border-zinc-100 rounded-3xl p-8 mt-12 text-left">
+                <div class="max-w-[550px] mx-auto bg-zinc-50 border border-zinc-100 rounded-3xl p-8 mt-12 text-left font-sans">
                     <h3 class="font-poppins font-black text-lg text-[#111827] text-center">Leave a Review</h3>
                     <p class="text-[#6B7280] text-xs text-center mt-1 mb-6">Your honest feedback helps us maintain our quality standards.</p>
                     <form id="reviewForm" onsubmit="event.preventDefault();" class="space-y-4">
                         <div>
                             <label for="commentName" class="block text-xs font-bold text-slate-700 mb-1.5">Your Name</label>
-                            <input type="text" id="commentName" class="w-full px-4 h-[44px] bg-white border border-zinc-200 rounded-xl text-xs focus:outline-none focus:border-[#FF8A00]" placeholder="Enter your full name" required />
+                            <input type="text" id="commentName" class="w-full px-4 h-[44px] bg-white border border-zinc-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" placeholder="Enter your full name" required />
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1.5">Rating</label>
@@ -1215,9 +1127,9 @@
                         </div>
                         <div>
                             <label for="commentText" class="block text-xs font-bold text-slate-700 mb-1.5">Review Message</label>
-                            <textarea id="commentText" class="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-xs focus:outline-none focus:border-[#FF8A00] min-h-[90px]" placeholder="How did we do? Share your experience..." required></textarea>
+                            <textarea id="commentText" class="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff] min-h-[90px]" placeholder="How did we do? Share your experience..." required></textarea>
                         </div>
-                        <button type="button" class="w-full h-[46px] bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]" onclick="postComment()">Submit Review</button>
+                        <button type="button" class="w-full h-[46px] bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]" onclick="postComment()">Submit Review</button>
                     </form>
                 </div>
             </div>
@@ -1225,7 +1137,7 @@
 
         <!-- Claim Promo Banner -->
         <section class="py-8 px-6 lg:px-[120px] max-w-[1440px] mx-auto z-10 relative">
-            <div class="bg-[#FF8A00] rounded-3xl p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div class="bg-[#1e90ff] rounded-3xl p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
                 <div class="flex items-center gap-5 text-white text-left z-10">
                     <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl">
                         <i class="fa-solid fa-gift"></i>
@@ -1236,9 +1148,62 @@
                     </div>
                 </div>
                 <div class="z-10">
-                    <button onclick="showBookingModal()" class="px-6 py-3 bg-white text-[#FF8A00] font-extrabold text-xs rounded-xl shadow-sm hover:bg-orange-50 transition-all">
+                    <a href="#booking" class="px-6 py-3 bg-white text-[#1e90ff] hover:text-[#0284c7] font-extrabold text-xs rounded-xl shadow-sm hover:bg-sky-50 transition-all inline-block">
                         Claim Offer
-                    </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 px-6 lg:px-[120px] bg-white border-t border-zinc-100 max-w-[1440px] mx-auto text-center z-10 relative scroll-mt-24">
+            <div class="space-y-12">
+                <div class="space-y-2">
+                    <p class="text-xs font-black uppercase tracking-widest text-[#1e90ff]">FAQ</p>
+                    <h2 class="font-poppins font-black text-3xl text-[#111827]">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="max-w-[800px] mx-auto space-y-4 text-left">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item border border-zinc-100 rounded-2xl bg-white transition-all duration-300">
+                        <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-poppins font-black text-sm text-[#111827]">What cleaning products do you use?</span>
+                            <i class="fa-solid fa-plus text-xs text-zinc-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6">
+                            <p class="text-slate-500 text-xs leading-relaxed font-semibold">We use professional, biodegradable, non-toxic, child-safe, and pet-friendly cleaning solutions. They leave zero toxic residues or strong unpleasant chemical odors.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 2 -->
+                    <div class="faq-item border border-zinc-100 rounded-2xl bg-white transition-all duration-300">
+                        <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-poppins font-black text-sm text-[#111827]">How long does sofa cleaning take?</span>
+                            <i class="fa-solid fa-plus text-xs text-zinc-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6">
+                            <p class="text-slate-500 text-xs leading-relaxed font-semibold">It typically takes 1.5 to 2.5 hours to deep clean a standard 5-seater sofa. Drying times vary between 3 to 6 hours depending on room ventilation and fabric type.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 3 -->
+                    <div class="faq-item border border-zinc-100 rounded-2xl bg-white transition-all duration-300">
+                        <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-poppins font-black text-sm text-[#111827]">Are your cleaners background verified?</span>
+                            <i class="fa-solid fa-plus text-xs text-zinc-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6">
+                            <p class="text-slate-500 text-xs leading-relaxed font-semibold">Absolutely. Every MyBuddy professional cleaner is thoroughly vetted, background checked, and undergoes rigorous internal training to deliver high-quality standards.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ 4 -->
+                    <div class="faq-item border border-zinc-100 rounded-2xl bg-white transition-all duration-300">
+                        <button onclick="toggleFaq(this)" class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                            <span class="font-poppins font-black text-sm text-[#111827]">What is your booking cancellation policy?</span>
+                            <i class="fa-solid fa-plus text-xs text-zinc-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 px-6">
+                            <p class="text-slate-500 text-xs leading-relaxed font-semibold">We offer free booking modifications or cancellations up to 12 hours before your scheduled time slot. Simply contact our support number to adjust details.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1253,7 +1218,7 @@
                     </div>
                     <form class="flex flex-col sm:flex-row gap-2.5 w-full max-w-sm" onsubmit="event.preventDefault(); alert('Subscribed successfully!'); this.reset();">
                         <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-xl bg-white border border-zinc-200 text-xs text-[#111827] focus:outline-none" required>
-                        <button type="submit" class="px-5 py-3 bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-xs rounded-xl transition-all shadow-sm">Subscribe</button>
+                        <button type="submit" class="px-5 py-3 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl transition-all shadow-sm">Subscribe</button>
                     </form>
                 </div>
 
@@ -1267,19 +1232,17 @@
     </main>
 
     <!-- Footer in Navy Blue Theme -->
-    <footer class="bg-[#111827] text-zinc-300 border-t border-zinc-800/80 py-16 px-6 md:px-[120px] relative overflow-hidden z-10 font-sans">
-        <div class="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
-        <div class="absolute top-0 left-1/4 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+    <footer class="bg-[#0f172a] text-zinc-300 border-t border-zinc-800/80 py-16 px-6 md:px-[120px] relative overflow-hidden z-10 font-sans">
+        <div class="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+        <div class="absolute top-0 left-1/4 w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
         <div class="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-left relative z-10">
             <!-- Brand Column -->
             <div class="space-y-6 lg:col-span-2">
                 <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#FF8A00] to-[#FFB347] rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/10">
-                        <i class="fa-solid fa-broom text-white text-lg"></i>
-                    </div>
+                    <img src="images/logo.png?v=3" alt="MyBuddy Logo" class="h-10 w-10 object-cover rounded-full shadow-lg border border-zinc-800">
                     <div class="flex flex-col">
-                        <span class="font-poppins font-extrabold text-xl text-white tracking-tight leading-none">MyBuddy</span>
+                        <span class="font-lora font-extrabold text-xl text-white tracking-tight leading-none">MyBuddy</span>
                         <span class="text-[9px] font-black uppercase tracking-wider text-zinc-500 mt-1 font-sans">Home Cleaning Services</span>
                     </div>
                 </a>
@@ -1287,13 +1250,13 @@
                     We make your home and office clean, safe, and comfortable. Book trusted cleaners in minutes.
                 </p>
                 <div class="flex space-x-3 pt-2">
-                    <a href="https://www.instagram.com/mybuddyhomecare" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#FF8A00] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
+                    <a href="https://www.instagram.com/mybuddyhomecare" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#1e90ff] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
                         <i class="fa-brands fa-instagram text-sm"></i>
                     </a>
-                    <a href="https://www.youtube.com/@yourchannel" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#FF8A00] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
+                    <a href="https://www.youtube.com/@yourchannel" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#1e90ff] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
                         <i class="fa-brands fa-youtube text-sm"></i>
                     </a>
-                    <a href="https://wa.me/919999999999" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#FF8A00] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
+                    <a href="https://wa.me/919999999999" target="_blank" class="w-9 h-9 bg-zinc-800 hover:bg-[#1e90ff] hover:text-white rounded-xl flex items-center justify-center hover:-translate-y-1 transition-all text-zinc-400 border border-zinc-700/50 shadow-sm">
                         <i class="fa-brands fa-whatsapp text-sm"></i>
                     </a>
                 </div>
@@ -1301,61 +1264,61 @@
 
             <!-- Quick Links -->
             <div class="space-y-4">
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#FF8A00] font-poppins">Quick Links</h4>
+                <h4 class="text-xs font-black uppercase tracking-widest text-[#1e90ff] font-poppins">Quick Links</h4>
                 <ul class="space-y-2.5 text-zinc-400 font-medium text-sm">
-                    <li><a href="#home" class="hover:text-[#FF8A00] transition-colors">Home</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Services</a></li>
-                    <li><a href="#how-it-works" class="hover:text-[#FF8A00] transition-colors">How It Works</a></li>
-                    <li><a href="#partner" class="hover:text-[#FF8A00] transition-colors">Partner</a></li>
-                    <li><a href="#about-us" class="hover:text-[#FF8A00] transition-colors">Why Us</a></li>
-                    <li><a href="#booking" class="hover:text-[#FF8A00] transition-colors">Book Now</a></li>
-                    <li><a href="#reviews" class="hover:text-[#FF8A00] transition-colors">Reviews</a></li>
-                    <li><a href="#faq" class="hover:text-[#FF8A00] transition-colors">FAQ</a></li>
+                    <li><a href="#home" class="hover:text-[#1e90ff] transition-colors">Home</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Services</a></li>
+                    <li><a href="#booking" class="hover:text-[#1e90ff] transition-colors">Book Now</a></li>
+                    <li><a href="#why-choose-us" class="hover:text-[#1e90ff] transition-colors">Why Us</a></li>
+                    <li><a href="#how-it-works" class="hover:text-[#1e90ff] transition-colors">How It Works</a></li>
+                    <li><a href="#partner" class="hover:text-[#1e90ff] transition-colors">Partner</a></li>
+                    <li><a href="#reviews" class="hover:text-[#1e90ff] transition-colors">Reviews</a></li>
+                    <li><a href="#faq" class="hover:text-[#1e90ff] transition-colors">FAQ</a></li>
                 </ul>
             </div>
 
             <!-- Services -->
             <div class="space-y-4">
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#FF8A00] font-poppins">Services</h4>
+                <h4 class="text-xs font-black uppercase tracking-widest text-[#1e90ff] font-poppins">Services</h4>
                 <ul class="space-y-2.5 text-zinc-400 font-medium text-sm">
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Home Cleaning</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Deep Cleaning</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Sofa Cleaning</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Kitchen Cleaning</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Bathroom Cleaning</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Plumbing Service</a></li>
-                    <li><a href="#services" class="hover:text-[#FF8A00] transition-colors">Office Cleaning</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Sofa Cleaning</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Table Cleaning</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Carpet Cleaning</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Mattress Sanitization</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">AC Wet Wash</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Water Tank Clean</a></li>
+                    <li><a href="#services" class="hover:text-[#1e90ff] transition-colors">Plumbing Service</a></li>
                 </ul>
             </div>
 
             <!-- Company -->
             <div class="space-y-4">
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#FF8A00] font-poppins">Company</h4>
+                <h4 class="text-xs font-black uppercase tracking-widest text-[#1e90ff] font-poppins">Company</h4>
                 <ul class="space-y-2.5 text-zinc-400 font-medium text-sm">
-                    <li><a href="#about-us" class="hover:text-[#FF8A00] transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-[#FF8A00] transition-colors">Careers</a></li>
-                    <li><a href="#" class="hover:text-[#FF8A00] transition-colors">Blog</a></li>
-                    <li><a href="#" class="hover:text-[#FF8A00] transition-colors">Terms &amp; Conditions</a></li>
-                    <li><a href="#" class="hover:text-[#FF8A00] transition-colors">Privacy Policy</a></li>
+                    <li><a href="#why-choose-us" class="hover:text-[#1e90ff] transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-[#1e90ff] transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-[#1e90ff] transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-[#1e90ff] transition-colors">Terms &amp; Conditions</a></li>
+                    <li><a href="#" class="hover:text-[#1e90ff] transition-colors">Privacy Policy</a></li>
                 </ul>
             </div>
 
             <!-- Support / Contact -->
             <div class="space-y-4">
-                <h4 class="text-xs font-black uppercase tracking-widest text-[#FF8A00] font-poppins">Support &amp; Contact</h4>
+                <h4 class="text-xs font-black uppercase tracking-widest text-[#1e90ff] font-poppins">Support &amp; Contact</h4>
                 <ul class="space-y-2.5 text-zinc-400 font-medium text-sm">
-                    <li><a href="#" class="hover:text-[#FF8A00] transition-colors">Help Center</a></li>
-                    <li><a href="#booking" class="hover:text-[#FF8A00] transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-[#1e90ff] transition-colors">Help Center</a></li>
+                    <li><a href="#booking" class="hover:text-[#1e90ff] transition-colors">Contact Us</a></li>
                     <li class="pt-2 flex items-start gap-2.5 text-zinc-400 text-xs">
-                        <i class="fa-solid fa-phone text-[#FF8A00] mt-0.5"></i>
+                        <i class="fa-solid fa-phone text-[#1e90ff] mt-0.5"></i>
                         <span>+91 93765 43210</span>
                     </li>
                     <li class="flex items-start gap-2.5 text-zinc-400 text-xs">
-                        <i class="fa-solid fa-envelope text-[#FF8A00] mt-0.5"></i>
+                        <i class="fa-solid fa-envelope text-[#1e90ff] mt-0.5"></i>
                         <span class="break-all">support@mybuddy.com</span>
                     </li>
                     <li class="flex items-start gap-2.5 text-zinc-400 text-xs">
-                        <i class="fa-solid fa-location-dot text-[#FF8A00] mt-0.5"></i>
+                        <i class="fa-solid fa-location-dot text-[#1e90ff] mt-0.5"></i>
                         <span>221B Baker Street, London, UK</span>
                     </li>
                 </ul>
@@ -1368,8 +1331,8 @@
                 &copy; 2026 MyBuddy Cleaning Services. All rights reserved.
             </div>
             <div class="flex space-x-6 text-zinc-500 font-semibold font-sans">
-                <a href="#" class="hover:text-[#FF8A00] transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-[#FF8A00] transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-[#1e90ff] transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-[#1e90ff] transition-colors">Terms of Service</a>
             </div>
         </div>
     </footer>
@@ -1381,7 +1344,7 @@
 
     <!-- Booking Coming Soon Modal -->
     <div id="bookingModal" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content font-sans">
             <button class="modal-close" onclick="closeBookingModal()">&times;</button>
             <div class="modal-icon">
                 <i class="fa-solid fa-clock"></i>
@@ -1405,28 +1368,26 @@
     <!-- Mobile Menu Drawer -->
     <div id="mobileMenu" class="mobile-menu">
         <div class="mobile-menu-header flex items-center justify-between p-5 border-b border-zinc-100">
-            <a href="#" class="flex items-center gap-2 group">
-                <div class="w-8 h-8 bg-gradient-to-br from-[#FF8A00] to-[#FFB347] rounded-lg flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-broom text-white text-sm"></i>
-                </div>
-                <span class="font-poppins font-black text-base text-[#FF8A00]">MyBuddy</span>
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="images/logo.png?v=3" alt="MyBuddy Logo" class="h-8 w-8 object-cover rounded-full border border-slate-100">
+                <span class="font-lora font-black text-base text-slate-800">MyBuddy</span>
             </a>
             <button id="mobileMenuClose" class="w-8 h-8 flex items-center justify-center text-zinc-500 rounded-lg hover:bg-zinc-50" aria-label="Close Menu" onclick="toggleMobileMenu()">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
         </div>
         <ul class="flex flex-col gap-5 p-6">
-            <li><a href="#home" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Home</a></li>
-            <li><a href="#services" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Services</a></li>
-            <li><a href="#how-it-works" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">How It Works</a></li>
-            <li><a href="#partner" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Partner</a></li>
-            <li><a href="#about-us" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Why Us</a></li>
-            <li><a href="#booking" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Book Now</a></li>
-            <li><a href="#reviews" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">Reviews</a></li>
-            <li><a href="#faq" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#FF8A00] transition-colors">FAQ</a></li>
+            <li><a href="#home" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Home</a></li>
+            <li><a href="#services" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Services</a></li>
+            <li><a href="#booking" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Book Now</a></li>
+            <li><a href="#why-choose-us" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Why Us</a></li>
+            <li><a href="#how-it-works" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">How It Works</a></li>
+            <li><a href="#partner" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Partner</a></li>
+            <li><a href="#reviews" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">Reviews</a></li>
+            <li><a href="#faq" onclick="toggleMobileMenu()" class="text-zinc-700 font-bold text-sm block hover:text-[#1e90ff] transition-colors font-sans">FAQ</a></li>
         </ul>
         <div class="p-6 border-t border-zinc-100 mt-auto">
-            <button onclick="showBookingModal(); toggleMobileMenu();" class="w-full py-3 bg-[#FF8A00] hover:bg-[#ea580c] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]">Book Service</button>
+            <a href="#booking" onclick="toggleMobileMenu();" class="w-full py-3 bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98] inline-block text-center">Book Service</a>
         </div>
     </div>
 
@@ -1544,7 +1505,7 @@
                 div.className = "bg-white p-6 rounded-2xl border border-zinc-100 text-left flex flex-col justify-between space-y-4 hover:-translate-y-1 hover:shadow-md transition-all";
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-orange-50 text-[#FF8A00] flex items-center justify-center font-bold text-xs shrink-0">${initials}</div>
+                        <div class="w-10 h-10 rounded-full bg-sky-50 text-[#1e90ff] flex items-center justify-center font-bold text-xs shrink-0">${initials}</div>
                         <div>
                             <p class="text-xs font-black text-[#111827]">${namePart}</p>
                             <div class="flex items-center gap-0.5 text-[10px] mt-0.5">${starsMarkup}</div>

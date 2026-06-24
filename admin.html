@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HomeBuddy - Admin Panel</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#1e90ff',
+                            accent: '#f0f9ff',
+                            dark: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        lora: ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .font-lora { font-family: 'Lora', serif; }
+    </style>
+</head>
+<body x-data="adminApp()" x-init="initApp()" class="text-slate-900 min-h-screen flex flex-col">
+
+    <!-- LOGIN PANEL -->
+    <div x-show="!loggedIn" class="flex-grow flex items-center justify-center px-4" x-cloak>
+        <div class="w-full max-w-md bg-white border border-slate-100 shadow-xl rounded-3xl p-8 text-center space-y-6">
+            <div class="flex flex-col items-center gap-3">
+                <img src="images/logo.png?v=3" alt="HomeBuddy Logo" class="h-16 w-16 object-cover rounded-full shadow-md border border-slate-100">
+                <div>
+                    <h1 class="font-lora font-black text-2xl text-slate-800">HomeBuddy</h1>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Admin Panel</p>
+                </div>
+            </div>
+
+            <form @submit.prevent="login()" class="space-y-4 text-left">
+                <div>
+                    <label for="adminPass" class="block text-xs font-bold text-slate-700 mb-1.5">Admin Password</label>
+                    <input type="password" id="adminPass" x-model="passwordInput" class="w-full px-4 h-[46px] bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#1e90ff]" placeholder="Enter password (default: admin123)" required>
+                </div>
+                <button type="submit" class="w-full h-[46px] bg-[#1e90ff] hover:bg-[#0284c7] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-[0.98]">
+                    Access Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div x-show="loggedIn" class="flex-grow flex flex-col lg:flex-row" x-cloak>
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-64 bg-[#0f172a] text-zinc-400 flex flex-col justify-between shrink-0 z-20">
+            <div>
+                <!-- Brand -->
+                <div class="p-6 border-b border-slate-800/80 flex items-center gap-3">
+                    <img src="images/logo.png?v=3" alt="HomeBuddy Logo" class="h-10 w-10 object-cover rounded-full shadow-sm border border-slate-700">
+                    <div class="flex flex-col">
+                        <span class="font-lora font-extrabold text-base text-white leading-none">HomeBuddy</span>
+                        <span class="text-[8px] font-black uppercase tracking-wider text-sky-500 mt-1 font-sans">Admin Console</span>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="p-4 space-y-1">
+                    <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800/50 hover:text-white'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-chart-line text-sm text-[#1e90ff]"></i> Dashboard
+                    </button>
+                    <button @click="activeTab = 'bookings'" :class="activeTab === 'bookings' ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800/50 hover:text-white'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-calendar-check text-sm text-[#1e90ff]"></i> Bookings Request
+                    </button>
+                    <button @click="activeTab = 'reviews'" :class="activeTab === 'reviews' ? 'bg-slate-800 text-white font-bold' : 'hover:bg-slate-800/50 hover:text-white'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-comments text-sm text-[#1e90ff]"></i> Moderate Reviews
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Footer / Logout -->
+            <div class="p-4 border-t border-slate-800/80">
+                <button @click="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-rose-400 hover:bg-rose-500/10 transition-all">
+                    <i class="fa-solid fa-right-from-bracket text-sm"></i> Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-grow flex flex-col min-w-0">
+            <!-- Header -->
+            <header class="bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between shrink-0">
+                <h2 class="font-poppins font-black text-lg text-slate-800 capitalize" x-text="activeTab"></h2>
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-slate-500">Live Database Sync</span>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-grow overflow-y-auto p-6 space-y-6">
+
+                <!-- 1. DASHBOARD TAB -->
+                <div x-show="activeTab === 'dashboard'" class="space-y-6" x-cloak>
+                    <!-- Quick Metrics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Stat card: Total Bookings -->
+                        <div class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Bookings</span>
+                                <span class="text-2xl font-black text-slate-800 block" x-text="bookings.length">0</span>
+                            </div>
+                            <div class="w-12 h-12 bg-sky-50 text-[#1e90ff] rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-calendar-days"></i></div>
+                        </div>
+
+                        <!-- Stat card: Pending Bookings -->
+                        <div class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Pending Actions</span>
+                                <span class="text-2xl font-black text-amber-600 block" x-text="bookings.filter(b => b.status === 'Pending').length">0</span>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-clock"></i></div>
+                        </div>
+
+                        <!-- Stat card: Total Reviews -->
+                        <div class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Customer Reviews</span>
+                                <span class="text-2xl font-black text-emerald-600 block" x-text="reviews.length">0</span>
+                            </div>
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-star"></i></div>
+                        </div>
+
+                        <!-- Stat card: Avg Rating -->
+                        <div class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 flex items-center justify-between">
+                            <div class="space-y-1">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Average Rating</span>
+                                <span class="text-2xl font-black text-amber-500 block" x-text="avgRating">0.0★</span>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-award"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Layout: Split lists -->
+                    <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+                        <!-- Recent Bookings Table (7 cols) -->
+                        <div class="xl:col-span-7 bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 space-y-4">
+                            <h3 class="font-poppins font-black text-sm text-slate-800">Recent Booking Requests</h3>
+                            <div class="overflow-x-auto min-w-full">
+                                <table class="w-full text-left text-xs border-collapse">
+                                    <thead>
+                                        <tr class="border-b border-slate-100 text-slate-400 font-bold">
+                                            <th class="py-3 pr-4">Customer</th>
+                                            <th class="py-3 px-4">Service</th>
+                                            <th class="py-3 px-4">Date</th>
+                                            <th class="py-3 pl-4">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-50 font-semibold text-slate-700">
+                                        <template x-for="b in bookings.slice(0, 5)" :key="b.id">
+                                            <tr>
+                                                <td class="py-3.5 pr-4">
+                                                    <div class="font-bold text-slate-900" x-text="b.name"></div>
+                                                    <div class="text-[10px] text-slate-400 mt-0.5" x-text="b.phone"></div>
+                                                </td>
+                                                <td class="py-3.5 px-4" x-text="b.service"></td>
+                                                <td class="py-3.5 px-4" x-text="b.date"></td>
+                                                <td class="py-3.5 pl-4">
+                                                    <span :class="{
+                                                        'bg-amber-50 text-amber-600': b.status === 'Pending',
+                                                        'bg-sky-50 text-[#1e90ff]': b.status === 'Confirmed',
+                                                        'bg-emerald-50 text-emerald-600': b.status === 'Completed',
+                                                        'bg-rose-50 text-rose-600': b.status === 'Cancelled'
+                                                    }" class="px-2 py-1 rounded-lg text-[10px] font-bold" x-text="b.status"></span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template x-if="bookings.length === 0">
+                                            <tr>
+                                                <td colspan="4" class="py-8 text-center text-slate-400 font-medium">No booking requests found.</td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Recent Comments Feed (5 cols) -->
+                        <div class="xl:col-span-5 bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6 space-y-4">
+                            <h3 class="font-poppins font-black text-sm text-slate-800">Recent Customer Reviews</h3>
+                            <div class="space-y-4 divide-y divide-slate-50">
+                                <template x-for="(r, index) in reviews.slice(0, 3)" :key="index">
+                                    <div :class="index > 0 ? 'pt-4' : ''" class="flex gap-3 text-left">
+                                        <div class="w-8 h-8 rounded-full bg-sky-50 text-[#1e90ff] flex items-center justify-center font-bold text-xs shrink-0" x-text="r.name.split(' ').map(n=>n[0]).join('').toUpperCase().substring(0,2)"></div>
+                                        <div class="space-y-1">
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold text-slate-900 text-xs" x-text="r.name"></span>
+                                                <span class="text-amber-500 text-[10px]"><i class="fa-solid fa-star"></i> <span x-text="r.rating || 5"></span></span>
+                                            </div>
+                                            <p class="text-slate-500 text-xs leading-relaxed italic" x-text="'&ldquo;' + r.comment + '&rdquo;'"></p>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template x-if="reviews.length === 0">
+                                    <div class="py-8 text-center text-slate-400 font-medium">No customer reviews found.</div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. BOOKINGS TAB -->
+                <div x-show="activeTab === 'bookings'" class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6" x-cloak>
+                    <!-- Bookings Table Desktop -->
+                    <div class="overflow-x-auto min-w-full hidden md:block">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-100 text-slate-400 font-bold">
+                                    <th class="py-3 pr-4">Customer Details</th>
+                                    <th class="py-3 px-4">Service Required</th>
+                                    <th class="py-3 px-4">Preferred Date</th>
+                                    <th class="py-3 px-4">Address Details</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 pl-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 font-semibold text-slate-700">
+                                <template x-for="b in bookings" :key="b.id">
+                                    <tr>
+                                        <td class="py-4 pr-4">
+                                            <div class="font-bold text-slate-900" x-text="b.name"></div>
+                                            <div class="text-[10px] text-[#1e90ff] mt-0.5"><i class="fa-solid fa-phone text-[8px]"></i> <span x-text="b.phone"></span></div>
+                                        </td>
+                                        <td class="py-4 px-4" x-text="b.service"></td>
+                                        <td class="py-4 px-4" x-text="b.date"></td>
+                                        <td class="py-4 px-4 max-w-[200px] truncate" :title="b.address" x-text="b.address"></td>
+                                        <td class="py-4 px-4">
+                                            <span :class="{
+                                                'bg-amber-50 text-amber-600': b.status === 'Pending',
+                                                'bg-sky-50 text-[#1e90ff]': b.status === 'Confirmed',
+                                                'bg-emerald-50 text-emerald-600': b.status === 'Completed',
+                                                'bg-rose-50 text-rose-600': b.status === 'Cancelled'
+                                            }" class="px-2.5 py-1 rounded-lg text-[10px] font-bold" x-text="b.status"></span>
+                                        </td>
+                                        <td class="py-4 pl-4 text-right space-x-2 shrink-0">
+                                            <select @change="updateStatus(b.id, $event.target.value)" class="bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg text-[10px] focus:outline-none">
+                                                <option value="Pending" :selected="b.status === 'Pending'">Pending</option>
+                                                <option value="Confirmed" :selected="b.status === 'Confirmed'">Confirm</option>
+                                                <option value="Completed" :selected="b.status === 'Completed'">Complete</option>
+                                                <option value="Cancelled" :selected="b.status === 'Cancelled'">Cancel</option>
+                                            </select>
+                                            <button @click="deleteBooking(b.id)" class="px-2 py-1 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 hover:text-rose-700 transition-colors rounded-lg text-[10px] font-bold">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template x-if="bookings.length === 0">
+                                    <tr>
+                                        <td colspan="6" class="py-8 text-center text-slate-400 font-medium">No booking requests found.</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Bookings Cards Mobile -->
+                    <div class="grid grid-cols-1 gap-4 md:hidden">
+                        <template x-for="b in bookings" :key="b.id">
+                            <div class="border border-slate-100 rounded-2xl p-5 space-y-4 text-left shadow-sm">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-slate-900" x-text="b.name"></h4>
+                                        <span class="text-[10px] text-slate-400 font-semibold" x-text="b.phone"></span>
+                                    </div>
+                                    <span :class="{
+                                        'bg-amber-50 text-amber-600': b.status === 'Pending',
+                                        'bg-sky-50 text-[#1e90ff]': b.status === 'Confirmed',
+                                        'bg-emerald-50 text-emerald-600': b.status === 'Completed',
+                                        'bg-rose-50 text-rose-600': b.status === 'Cancelled'
+                                    }" class="px-2 py-1 rounded-lg text-[10px] font-bold" x-text="b.status"></span>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-y-3 text-[11px] font-semibold text-slate-600">
+                                    <div>
+                                        <span class="text-slate-400 font-bold block text-[9px] uppercase tracking-wider">Service</span>
+                                        <span x-text="b.service"></span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-400 font-bold block text-[9px] uppercase tracking-wider">Date</span>
+                                        <span x-text="b.date"></span>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span class="text-slate-400 font-bold block text-[9px] uppercase tracking-wider">Address</span>
+                                        <span x-text="b.address" class="leading-relaxed"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-2 border-t border-slate-50 pt-4 items-center justify-between">
+                                    <select @change="updateStatus(b.id, $event.target.value)" class="flex-1 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs focus:outline-none">
+                                        <option value="Pending" :selected="b.status === 'Pending'">Pending</option>
+                                        <option value="Confirmed" :selected="b.status === 'Confirmed'">Confirm</option>
+                                        <option value="Completed" :selected="b.status === 'Completed'">Complete</option>
+                                        <option value="Cancelled" :selected="b.status === 'Cancelled'">Cancel</option>
+                                    </select>
+                                    <button @click="deleteBooking(b.id)" class="px-3 py-2 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 hover:text-rose-700 transition-colors rounded-xl text-xs font-bold">
+                                        <i class="fa-regular fa-trash-can"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                        <template x-if="bookings.length === 0">
+                            <div class="py-8 text-center text-slate-400 font-medium">No booking requests found.</div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- 3. REVIEWS TAB -->
+                <div x-show="activeTab === 'reviews'" class="bg-white border border-slate-100 shadow-md shadow-slate-100/50 rounded-2xl p-6" x-cloak>
+                    <!-- Reviews Table/List -->
+                    <div class="overflow-x-auto min-w-full">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-100 text-slate-400 font-bold">
+                                    <th class="py-3 pr-4">Reviewer</th>
+                                    <th class="py-3 px-4">Stars</th>
+                                    <th class="py-3 px-4">Review Comment</th>
+                                    <th class="py-3 pl-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 font-semibold text-slate-700">
+                                <template x-for="r in reviews" :key="r.id">
+                                    <tr>
+                                        <td class="py-4 pr-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-sky-50 text-[#1e90ff] flex items-center justify-center font-bold text-xs shrink-0" x-text="r.name.split(' ').map(n=>n[0]).join('').toUpperCase().substring(0,2)"></div>
+                                                <div class="font-bold text-slate-900" x-text="r.name"></div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-4 text-amber-500 font-black">
+                                            <span x-text="r.rating || 5"></span> ★
+                                        </td>
+                                        <td class="py-4 px-4 max-w-[300px] md:max-w-md break-all leading-relaxed font-semibold italic text-slate-500" x-text="'&ldquo;' + r.comment + '&rdquo;'"></td>
+                                        <td class="py-4 pl-4 text-right">
+                                            <button @click="deleteReview(r.id)" class="px-3 py-2 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 hover:text-rose-700 transition-colors rounded-xl text-xs font-bold">
+                                                <i class="fa-regular fa-trash-can"></i> Delete Review
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template x-if="reviews.length === 0">
+                                    <tr>
+                                        <td colspan="4" class="py-8 text-center text-slate-400 font-medium">No customer reviews found.</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDK (v8 compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script>
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyBJwCahGyDuHdHLjT_xG6XPdFChfEsJza4",
+            authDomain: "sukhveer-reviews.firebaseapp.com",
+            projectId: "sukhveer-reviews",
+            storageBucket: "sukhveer-reviews.appspot.com",
+            messagingSenderId: "284333381338",
+            appId: "1:284333381338:web:5a363b583f2cb33d52f7e3",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        window.adminApp = function() {
+            return {
+                loggedIn: false,
+                passwordInput: '',
+                activeTab: 'dashboard',
+                bookings: [],
+                reviews: [],
+                avgRating: '0.0★',
+
+                initApp() {
+                    if (localStorage.getItem('homebuddy_admin_logged') === 'true') {
+                        this.loggedIn = true;
+                        this.loadData();
+                    }
+                },
+
+                login() {
+                    if (this.passwordInput === 'admin123') {
+                        this.loggedIn = true;
+                        localStorage.setItem('homebuddy_admin_logged', 'true');
+                        this.passwordInput = '';
+                        this.loadData();
+                    } else {
+                        alert('Incorrect Password! Please try again.');
+                        this.passwordInput = '';
+                    }
+                },
+
+                logout() {
+                    this.loggedIn = false;
+                    localStorage.removeItem('homebuddy_admin_logged');
+                    this.bookings = [];
+                    this.reviews = [];
+                },
+
+                loadData() {
+                    /* Live Bookings Sync */
+                    db.collection("bookings")
+                        .orderBy("timestamp", "desc")
+                        .onSnapshot((snapshot) => {
+                            this.bookings = [];
+                            snapshot.forEach((doc) => {
+                                this.bookings.push({ id: doc.id, ...doc.data() });
+                            });
+                        }, (error) => {
+                            console.error("Bookings sync error:", error);
+                        });
+
+                    /* Live Reviews Sync */
+                    db.collection("comments")
+                        .orderBy("timestamp", "desc")
+                        .onSnapshot((snapshot) => {
+                            this.reviews = [];
+                            snapshot.forEach((doc) => {
+                                this.reviews.push({ id: doc.id, ...doc.data() });
+                            });
+                            this.calculateRating();
+                        }, (error) => {
+                            console.error("Reviews sync error:", error);
+                        });
+                },
+
+                calculateRating() {
+                    if (this.reviews.length === 0) {
+                        this.avgRating = '0.0★';
+                        return;
+                    }
+                    const totalStars = this.reviews.reduce((sum, r) => sum + (parseInt(r.rating) || 5), 0);
+                    const avg = totalStars / this.reviews.length;
+                    this.avgRating = avg.toFixed(1) + '★';
+                },
+
+                async updateStatus(id, newStatus) {
+                    try {
+                        await db.collection("bookings").doc(id).update({ status: newStatus });
+                    } catch (error) {
+                        console.error("Error updating booking status:", error);
+                        alert("Failed to update status.");
+                    }
+                },
+
+                async deleteBooking(id) {
+                    if (confirm("Are you sure you want to delete this booking request?")) {
+                        try {
+                            await db.collection("bookings").doc(id).delete();
+                        } catch (error) {
+                            console.error("Error deleting booking:", error);
+                            alert("Failed to delete booking.");
+                        }
+                    }
+                },
+
+                async deleteReview(id) {
+                    if (confirm("Are you sure you want to delete this customer review?")) {
+                        try {
+                            await db.collection("comments").doc(id).delete();
+                        } catch (error) {
+                            console.error("Error deleting review:", error);
+                            alert("Failed to delete review.");
+                        }
+                    }
+                }
+            };
+        };
+    </script>
+</body>
+</html>

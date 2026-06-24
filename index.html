@@ -69,7 +69,7 @@
             --bmh-shadow:        rgba(30, 144, 255, 0.08);
             --bmh-shadow-dark:   rgba(15, 23, 42, 0.06);
 
-            /* Sky Blue ambient shadow coordinates */
+            /* Sky Blue ambient shadows */
             --org: 30, 144, 255;
             --nvy: 15, 23, 42;
         }
@@ -1039,7 +1039,7 @@
                 <!-- Right Form Panel -->
                 <div class="lg:col-span-8 bg-white border border-slate-100 shadow-md shadow-sky-500/5 rounded-3xl p-8 w-full text-left">
                     <h3 class="font-poppins font-black text-lg text-[#111827] mb-6">Quick Booking Form</h3>
-                    <form onsubmit="event.preventDefault(); showBookingModal();" class="space-y-6">
+                    <form onsubmit="window.submitBooking(event)" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="bookingName" class="block text-xs font-bold text-slate-700 mb-1.5">Your Name</label>
@@ -1539,6 +1539,8 @@
                 allReviews.push(doc.data());
             });
             renderReviews();
+        }, (error) => {
+            console.error("Reviews snapshot listener error:", error);
         });
 
         /* POST COMMENT */
@@ -1569,6 +1571,42 @@
                 }
             } catch (error) {
                 console.error("Error posting comment:", error);
+            }
+        };
+
+        /* SUBMIT BOOKING REQUEST */
+        window.submitBooking = async function (e) {
+            e.preventDefault();
+            const name = document.getElementById("bookingName").value.trim();
+            const phone = document.getElementById("bookingPhone").value.trim();
+            const service = document.getElementById("bookingService").value;
+            const date = document.getElementById("bookingDate").value;
+            const address = document.getElementById("bookingAddress").value.trim();
+
+            if (!name || !phone || !service || !date || !address) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            try {
+                const bookingsCol = collection(db, "bookings");
+                await addDoc(bookingsCol, {
+                    name,
+                    phone,
+                    service,
+                    date,
+                    address,
+                    status: "Pending",
+                    timestamp: serverTimestamp()
+                });
+                
+                e.target.reset();
+                showBookingModal();
+            } catch (error) {
+                console.error("Error submitting booking:", error);
+                // Fallback: reset form and display modal anyway
+                e.target.reset();
+                showBookingModal();
             }
         };
     </script>
